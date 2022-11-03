@@ -1,6 +1,5 @@
-import express from 'express';
+import express from 'express'
 
 export default class BaseController {
-  router = express.Router();
-  
+  router = express.Router()
 }

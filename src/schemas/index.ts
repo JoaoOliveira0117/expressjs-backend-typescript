@@ -1,4 +1,4 @@
-import Test from "./testSchema";
-import User from "./userSchema";
+import Test from './testSchema'
+import User from './userSchema'
 
-export { Test, User };
+export { Test, User }
