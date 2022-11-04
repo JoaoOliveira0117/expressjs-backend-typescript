@@ -12,6 +12,8 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
-    '@typescript-eslint/no-misused-promises': 0
+    '@typescript-eslint/no-misused-promises': 0,
+    '@typescript-eslint/no-this-alias': 0,
+    '@typescript-eslint/strict-boolean-expressions': 0
   }
 }

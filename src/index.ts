@@ -1,11 +1,11 @@
 import express from 'express'
 import dbConnect from './config/db'
-import { UserController } from './controllers'
+import router from './routes'
 const app = express()
 
 app.use(express.json())
 
-app.use('/user', UserController)
+app.use('/', router)
 
 dbConnect().catch((err) => console.log(err))
 
