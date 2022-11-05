@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
+import { error } from '../helpers/responses'
 import { validateToken } from '../helpers/token'
 
 async function authenticate (req: Request, res: Response, next: NextFunction): Promise<any> {
@@ -7,11 +8,11 @@ async function authenticate (req: Request, res: Response, next: NextFunction): P
     const token = header.split(' ')[1]
     const isValid = validateToken(token)
 
-    if (!isValid) return res.status(401).json({ error: 'Invalid Bearer token' })
+    if (!isValid) return error(res, 'Invalid Bearer token')
 
     return next()
   } catch (err: any) {
-    return res.status(401).json({ error: err.message })
+    return error(res, err.message)
   }
 }
 

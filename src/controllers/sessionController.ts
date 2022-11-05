@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { error, success } from '../helpers/responses'
 import { generateToken } from '../helpers/token'
 import { User } from '../schemas'
 import BaseController from './baseController'
@@ -27,16 +28,14 @@ class SessionController extends BaseController {
         throw new Error('Incorrect password')
       }
 
-      return res.json({
-        data: {
-          email: user.email,
-          token: generateToken()
-        }
-      })
+      const response = {
+        email: user.email,
+        token: generateToken()
+      }
+
+      return success(res, response)
     } catch (err: any) {
-      return res.status(400).json({
-        error: err.message
-      })
+      return error(res, err.message)
     }
   }
 }

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { BaseController } from '.'
+import { error, success } from '../helpers/responses'
 import authenticate from '../middlewares/auth'
 import { User } from '../schemas'
 
@@ -17,13 +18,9 @@ class UserController extends BaseController {
   async getUsers (req: Request, res: Response): Promise<Response> {
     try {
       const users = await User.find()
-      return res.json({
-        data: users
-      })
+      return success(res, users)
     } catch (err: any) {
-      return res.status(400).json({
-        error: err.message
-      })
+      return error(res, err.message)
     }
   }
 
@@ -32,25 +29,17 @@ class UserController extends BaseController {
       const user = req.body
       const newUser = new User(user)
       await newUser.save()
-      return res.json({
-        data: newUser
-      })
+      return success(res, newUser)
     } catch (err: any) {
-      return res.status(400).json({
-        error: err.message
-      })
+      return error(res, err.message)
     }
   }
 
   async testAuthentication (req: Request, res: Response): Promise<Response> {
     try {
-      return res.json({
-        data: 'Success!'
-      })
+      return success(res, 'Success!')
     } catch (err: any) {
-      return res.status(400).json({
-        error: err.message
-      })
+      return error(res, err.message)
     }
   }
 }
